@@ -3,27 +3,38 @@ class Node (object):
         self.data = num
         self.next = next
 
+    def __str__ (self):
+        return str (self.data)
+
 class List (object):
     "List: A meta-object that provides the 'head' attribute and several functions for working with linked-lists"
-    def __init__ (self, head = None):
-        self.head = head
+    def __init__ (
+                    self,
+                    head  = None,
+                    tail  = None,
+                    count = None
+                 ):
 
-    def echo (self):
+        self.head  = head
+        self.tail  = tail
+        self.count = count
+
+    def __str__ (self):
         "echo: print all the Nodes in the attached list"
-        link = self.head
+        node = self.head
 
-        while (link is not None):
-            print link.data
-            link = link.next
+        while (node is not None):
+            print node
+            node = node.next
 
     def reverse (self):
         "reverse: alter the list by reversing the order"
-        link = self.head
+        node = self.head
         stack = None
 
-        while (link is not None):
-            hold = link
-            link = link.next
+        while (node is not None):
+            hold = node
+            node = node.next
             hold.next = stack
             stack = hold
 
