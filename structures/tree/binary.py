@@ -11,7 +11,7 @@ class Node (object):
     def __str__ (self):
         return str (self.data)
 
-    def count (self):
+    def __len__ (self):
         sum = 0
 
         if self.lt:

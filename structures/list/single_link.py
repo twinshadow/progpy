@@ -6,38 +6,73 @@ class Node (object):
     def __str__ (self):
         return str (self.data)
 
+    def __len__ (self):
+        count = len(self.next) + 1 if self.next else 1
+        return count
+
 class List (object):
     "List: A meta-object that provides the 'head' attribute and several functions for working with linked-lists"
     def __init__ (
                     self,
                     head  = None,
-                    tail  = None,
-                    count = None
                  ):
-
         self.head  = head
-        self.tail  = tail
-        self.count = count
 
     def __str__ (self):
-        "echo: print all the Nodes in the attached list"
         node = self.head
-
-        while (node is not None):
+        while node:
             print node
             node = node.next
 
-    def reverse (self):
-        "reverse: alter the list by reversing the order"
+    def __len__ (self):
+        return len(self.head) if self.head else 0
+
+    def __nonzero__ (self):
+        return 1 if self.head else 0
+
+    def __getitem__ (self, k):
+        len = self.__len__()
+        count = 0
+        node = self.head
+
+        if isinstance(k, slice):
+            start = k.start if k.start else 0
+            step = k.step if k.step else 0
+            stop = k.stop if k.stop else 0
+
+            stack = None
+            while node:
+            return stack
+        else:
+            if k < 0:
+                k += len
+                if k < len: raise IndexError("list index out of range")
+            if k > len: raise IndexError("list index out of range")
+
+            while node:
+                if count == k: return Node(node.data)
+                count += 1
+                node = node.next
+
+    def __setitem__ (self, k, v):
+        pass
+
+    def __contains__ (self, v):
+        node = self.head
+        while node:
+            if node.data == v:
+                return 1
+            else: node = node.next
+        return 0
+
+    def __reversed__ (self):
         node = self.head
         stack = None
-
-        while (node is not None):
+        while node is not None:
             hold = node
             node = node.next
             hold.next = stack
             stack = hold
-
         self.head = stack
 
 #        def sort (self):
